@@ -1,5 +1,6 @@
 import Principal "mo:base/Principal";
 import Time "mo:base/Time";
+import Nat64 "mo:base/Nat64";
 module {
 
     public type Role = {
@@ -17,7 +18,6 @@ module {
 
     public type ProposalContent = {
         #ChangeManifesto : Text; // Change the manifesto to the provided text
-        #AddGoal : Text;
         #AddMentor : Principal; // Upgrade the member to a mentor with the provided principal
     };
 

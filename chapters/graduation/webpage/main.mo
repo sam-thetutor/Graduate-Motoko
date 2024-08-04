@@ -1,6 +1,7 @@
 import Types "types";
 import Result "mo:base/Result";
 import Text "mo:base/Text";
+import Principal "mo:base/Principal";
 actor Webpage {
 
     type Result<A, B> = Result.Result<A, B>;
@@ -15,13 +16,17 @@ actor Webpage {
         return ({
             status_code = 404;
             headers = [];
-            body = Text.encodeUtf8("Hello world!");
+            body = Text.encodeUtf8("Hello world! We are the Motoko Bootcamp graduates Cohort 5");
             streaming_strategy = null;
         });
     };
 
     // This function should only be callable by the DAO canister (no one else should be able to change the manifesto)
     public shared ({ caller }) func setManifesto(newManifesto : Text) : async Result<(), Text> {
-        return #err("Not implemented");
+        if(caller != Principal.fromText("7iplp-saaaa-aaaab-qacuq-cai")){
+            return #err("caller is not DAO canister");
+        };
+        manifesto := newManifesto;
+        return #ok();
     };
 };
